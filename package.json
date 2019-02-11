@@ -1,0 +1,25 @@
+{
+  "name": "bodymeas",
+  "version": "0.0.1",
+  "description": "Check your health",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.iu.edu/larsmay/bodyMeas"
+  },
+  "keywords": [
+    "BMI",
+    "Body_fat",
+    "heart_rate"
+  ],
+  "author": "Larry May",
+  "license": "ISC",
+  "dependencies": {
+    "actions-on-google": "^2.5.0",
+    "firebase-admin": "^7.0.0",
+    "firebase-functions": "^2.2.0"
+  }
+}
