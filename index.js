@@ -18,7 +18,7 @@ app.intent("bodyMeas", (conv, {weight, height, type, gender, age}) => {
 
 });
 
-bmi = (weight, height, type) => {
+app.intent("bmi", (conv) = (weight, height, type) => {
     var bmi;
     if (type == 'metric'){
         bmi = weight / (height * height);
@@ -29,9 +29,9 @@ bmi = (weight, height, type) => {
         bmi = weight / (height * height);
     }
     return bmi;
-};
+});
 
-body_fat =(bmi, gender, age) => {
+app.intent("body_fat", (conv) = (bmi, gender, age) => {
     var bodyPercent;
 
     if (gender == "male"){
@@ -42,6 +42,6 @@ body_fat =(bmi, gender, age) => {
         bodyPercent = (1.20*bmi)+(0.23 * age) - 5.4;
     }
     return bodyPercent;
-};
+});
 
 exports.generateBodyMeas = bodyMeas.https.onRequest(app);
