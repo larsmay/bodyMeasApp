@@ -6,11 +6,11 @@ const bodyMeas = require('firebase-functions');
 
 const app = dialogflow({debug:true});
 
-app.intent("heart-Rate", (conv, {age, rest}) => {
+app.intent("heart-Rate", (conv) => {
 
     var message;
-    conv.data.age = age;
-    conv.data.rest = rest;
+    let age = conv.data.age;
+    let rest = conv.data.rest;
     var max = 220 - age - rest;
     
     var heart1 = max * 0.6 + parseInt(rest);
@@ -23,14 +23,15 @@ app.intent("heart-Rate", (conv, {age, rest}) => {
 
 });
 
-app.intent("bmi", (conv) = () => {
+app.intent("bmi", (conv, {weight, height}) => {
     var bmi;
     var message;
-    console.log("I need height and weight");
-    let weight = conv.data.weight;
-    
-    let height = conv.data.height;
-    conv.data.type = type;
+
+    const weight = conv.data.weight;
+
+    const height = conv.data.height;
+    let type = conv.data.type; 
+
     if (type == 'metric'){
         bmi = weight / (height * height);
         conv.data.bmi = bmi;
@@ -47,11 +48,11 @@ app.intent("bmi", (conv) = () => {
     
 });
 
-app.intent("body_fat", (conv) = (bmi, gender, age) => {
+app.intent("body_fat", (conv) = () => {
     var bodyPercent;
     var message;
-    conv.data.gender = gender;
-    conv.data.age = age;
+    let gender = conv.data.gender;
+    let age =conv.data.age;
     if (gender == "male"){
         bodyPercent = (1.20*bmi)+(0.23 * age) - 16.2;
     }
