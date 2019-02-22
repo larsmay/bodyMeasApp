@@ -6,11 +6,11 @@ const bodyMeas = require('firebase-functions');
 
 const app = dialogflow({debug:true});
 
-app.intent("heart-Rate", (conv) => {
+app.intent("heart-Rate", (conv, {age, rest}) => {
 
     var message;
-    let age = conv.data.age;
-    let rest = conv.data.rest;
+    age = conv.data.age;
+    rest = conv.data.rest;
     var max = 220 - age - rest;
     
     var heart1 = max * 0.6 + parseInt(rest);
@@ -48,11 +48,11 @@ app.intent("bmi", (conv, {weight, height}) => {
     
 });
 
-app.intent("body_fat", (conv) = () => {
+app.intent("body_fat", (conv, {gender, age}) => {
     var bodyPercent;
     var message;
-    let gender = conv.data.gender;
-    let age =conv.data.age;
+    gender = conv.data.gender;
+    age = conv.data.age;
     if (gender == "male"){
         bodyPercent = (1.20*bmi)+(0.23 * age) - 16.2;
     }
