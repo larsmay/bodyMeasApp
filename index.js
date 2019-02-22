@@ -23,14 +23,14 @@ app.intent("heart-Rate", (conv, {age, rest}) => {
 
 });
 
-app.intent("bmi", (conv, {weight, height}) => {
+app.intent("bmi", (conv, {weight, height, type}) => {
     var bmi;
     var message;
 
-    const weight = conv.data.weight;
+    weight = conv.data.weight;
 
-    const height = conv.data.height;
-    let type = conv.data.type; 
+    height = conv.data.height;
+    type = conv.data.type; 
 
     if (type == 'metric'){
         bmi = weight / (height * height);
