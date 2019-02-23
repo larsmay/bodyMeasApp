@@ -39,7 +39,7 @@ app.intent("heart-Rate", (conv) => {
 
 app.intent("bmi", (conv) => {
     var message;
-
+    var bmi;
     let weight = conv.data.weight;
 
     let height = conv.data.height;
@@ -52,16 +52,16 @@ app.intent("bmi", (conv) => {
     } else if (!height) {
         conv.ask("Please provide height in inches or pounds");
     } else if (!type) {
-        conv.ask("Please provide the measurement type in imperial or metric")
+        conv.ask("Please provide the measurement type in imperial or metric");
     } else {
         if (type == 'metric'){
-            let bmi = weight / (height * height);
+            bmi = weight / (height * height);
             conv.data.bmi = bmi;
         }
         else {
             weight = weight * 0.45;
             height = height * 0.025;
-            let bmi = weight / (height * height);
+            bmi = weight / (height * height);
             conv.data.bmi = bmi;
 
             
@@ -84,7 +84,7 @@ app.intent("body_fat", (conv) => {
     let bmi = conv.data.bmi;
 
     if (!age && !gender) {
-        conv.ask("To compute your body fat percentage I need your age and gender")
+        conv.ask("To compute your body fat percentage I need your age and gender");
     }
     else {
         if (gender == "male"){
