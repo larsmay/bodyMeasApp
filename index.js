@@ -76,14 +76,13 @@ app.intent("userRequestsBMI", (conv) => {
 });
 
 app.intent("bmi",(conv) => {
-    const weight = conv.parameters['weight'];
-    conv.data.weight = weight;
-
-    const height = conv.parameters['height'];
+    const height = conv.parameters['height']['amount'];
     conv.data.height = height;
 
-    const type = conv.parameters['type'];
-    conv.data.type = type;
+    const weight = conv.parameters['weight']['amount'];
+    conv.data.weight = weight;
+
+    const type = 'imperial';
 
     let bmi;
     if (type == 'metric'){
