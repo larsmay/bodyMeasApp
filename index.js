@@ -58,7 +58,7 @@ app.intent("userRequestsBMI", (conv) => {
     } else {
         if (type == 'metric'){
             bmi = weight / (height * height);
-            conv.data.bmi = bmi;
+            conv.data.bmi = bmi; //this sucks
         }
         else {
             weight = weight * 0.45;
