@@ -48,13 +48,13 @@ app.intent("userRequestsBMI", (conv) => {
     let height = conv.data.height;
     let type = 'imperial';
 
-    if (!type) {
+    //if (!type) {
         conv.ask("Please provide the measurement type in imperial or metric");
-    } else if (!height) {
+    //} else if (!height) {
         conv.ask("Please provide height in inches or pounds");
-    } else if (!weight) {
+    //} else if (!weight) {
         conv.ask("Please provide your weight");
-    } else {
+    //} else {
         if (type == 'metric'){
             bmi = weight / (height * height);
             conv.data.bmi = bmi;
@@ -70,7 +70,7 @@ app.intent("userRequestsBMI", (conv) => {
         message = `Your bmi is ${bmi}. Would you like to know anything else?`;
 
         conv.ask(message);
-    }    
+    //}    
 });
 
 app.intent("bmi",(conv) => {
