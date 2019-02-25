@@ -82,6 +82,23 @@ app.intent("bmi",(conv) => {
 
     const type = conv.parameters['type'];
     conv.data.type = type;
+
+    let bmi;
+    if (type == 'metric'){
+            bmi = weight / (height * height);
+            conv.data.bmi = bmi;
+        }
+        else {
+            weight = weight * 0.45;
+            height = height * 0.025;
+            bmi = weight / (height * height);
+            conv.data.bmi = bmi;
+
+            
+        }
+    message = `Your bmi is ${bmi}. Would you like to know anything else?`;
+
+        conv.ask(message);    
 });
 
 app.intent("body_fat", (conv) => {
