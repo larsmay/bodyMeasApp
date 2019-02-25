@@ -82,6 +82,7 @@ app.intent("bmi",(conv) => {
     conv.data.weight = weight;
     console.log();
     var type = 'imperial';
+    var message;
 
     let bmi;
     if (type == 'metric'){
