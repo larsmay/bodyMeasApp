@@ -75,13 +75,13 @@ app.intent("userRequestsBMI", (conv) => {
 
 app.intent("bmi",(conv) => {
     console.log();
-    var height = conv.parameters['height']['amount'];
+    const height = conv.parameters['height']['amount'];
     conv.data.height = height;
     console.log();
-    var weight = conv.parameters['weight']['amount'];
+    const weight = conv.parameters['weight']['amount'];
     conv.data.weight = weight;
     console.log();
-    var type = 'imperial';
+    const type = 'imperial';
     var message;
 
     let bmi;
@@ -94,8 +94,6 @@ app.intent("bmi",(conv) => {
             height = height * 0.025;
             bmi = weight / (height * height);
             conv.data.bmi = bmi;
-
-            
         }
         message = `Your bmi is ${bmi}. Would you like to know anything else?`;
 
