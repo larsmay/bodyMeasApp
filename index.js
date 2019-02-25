@@ -73,7 +73,7 @@ app.intent("userRequestsBMI", (conv) => {
     }    
 });
 
-app.intent("getBMIParams",(conv) => {
+app.intent("bmi",(conv) => {
     const weight = conv.parameters['weight'];
     conv.data.weight = weight;
 
