@@ -12,10 +12,7 @@ app.intent("userRequestsHeart", (conv) => {
     let age = conv.parameters['age'];
     let rest = conv.paramenters['rest'];
 
-    if(!age && !rest){
-        conv.ask("Please provide your age and resting heart rate.");
-    }
-    else if(!age){
+    if(!age){
         conv.ask("Please provide your age");
     }
     else if(!rest){
