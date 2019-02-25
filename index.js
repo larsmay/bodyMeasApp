@@ -9,8 +9,8 @@ const app = dialogflow({debug:true});
 app.intent("heart-Rate", (conv) => {
 
     var message;
-    let age = conv.data.age;
-    let rest = conv.data.rest;
+    let age = conv.parameters['age'];
+    let rest = conv.paramenters['rest'];
 
     if(!age && !rest){
         conv.ask("Please provide your age and resting heart rate.");
@@ -32,6 +32,9 @@ app.intent("heart-Rate", (conv) => {
 
         conv.ask(message);
 
+        conv.data.age = age;
+        conv.data.rest = rest;
+
     }
     
 
@@ -40,13 +43,13 @@ app.intent("heart-Rate", (conv) => {
 app.intent("bmi", (conv) => {
     var message;
     var bmi;
-    let weight = conv.data.weight;
-
-    let height = conv.data.height;
-    let type = conv.data.type; 
+ 
+    let weight = conv.parameters['weight'];
+    let height = conv.parameters['height'];
+    let type = conv.parameters['type'];
 
     if (!weight && !height && !type) {
-        conv.ask("To calculate your B M I, I need you to provide the type in metric or imperial, your weight, and your height");
+        conv.ask("To calculate your BMI, I need you to provide the type in metric or imperial, your weight, and your height");
     } else if (!weight) {
         conv.ask("Please provide your weight");
     } else if (!height) {
@@ -69,6 +72,11 @@ app.intent("bmi", (conv) => {
         message = `Your bmi is ${bmi}. Would you like to know anything else?`;
 
         conv.ask(message);
+
+        conv.data.weight = weight;
+
+        conv.data.height = height;
+        conv.data.type = type;
     }
 
 
