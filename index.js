@@ -162,7 +162,7 @@ app.intent("userRequestsBodyFat", (conv) => {
             bodyPercent = (1.20*bmi)+(0.23 * age) - 5.4;
         }
 
-        message = `Your Body Fat percentage is ${bodyPercent} percent.  Would you like to know anything else?`;
+        var message = `Your Body Fat percentage is ${bodyPercent} percent.  Would you like to know anything else?`;
 
         conv.ask(message);
     });
