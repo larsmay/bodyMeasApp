@@ -39,7 +39,7 @@ app.intent("userRequestsHeart", (conv) => {
 
 app.intent("heartRate",(conv) => {
     var message;
-    let age = conv.parameters['age'];
+    let age = conv.parameters['age']['amount'];
     conv.data.age = age;
 
     let rest = conv.parameters['rest'];
@@ -77,7 +77,7 @@ app.intent("userRequestsBMI", (conv) => {
     } else {
         if (type == 'metric'){
             bmi = weight / (height * height);
-            conv.data.bmi = bmi; //this sucks
+            conv.data.bmi = bmi;
         }
         else {
             weight = weight * 0.45;
@@ -155,7 +155,7 @@ app.intent("userRequestsBodyFat", (conv) => {
         let bmi = conv.data.bmi;
         let gender = conv.parameters['gender'];
         conv.data.gender = gender;
-        let age = conv.parameters['age'];
+        let age = conv.parameters['age']['amount'];
         conv.data.age = age;
         var bodyPercent;
 
