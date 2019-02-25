@@ -9,8 +9,8 @@ const app = dialogflow({debug:true});
 app.intent("userRequestsHeart", (conv) => {
 
     var message;
-    let age = conv.parameters['age'];
-    let rest = conv.paramenters['rest'];
+    let age = conv.data.age;
+    let rest = conv.data.rest;
 
     if(!age){
         conv.ask("Please provide your age");
