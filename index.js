@@ -44,9 +44,9 @@ app.intent("userRequestsBMI", (conv) => {
     var message;
     var bmi;
  
-    const weight = conv.data.weight;
-    const height = conv.data.height;
-    const type = conv.data.type;
+    let weight = conv.data.weight;
+    let height = conv.data.height;
+    let type = conv.data.type;
 
     if (!type) {
         conv.ask("Please provide the measurement type in imperial or metric");
