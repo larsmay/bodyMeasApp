@@ -72,7 +72,7 @@ app.intent("userRequestsBMI", (conv) => {
         message = `Your bmi is ${bmi}. Would you like to know anything else?`;
 
         conv.ask(message);
-    //}    
+    }    
 });
 
 app.intent("bmi",(conv) => {
