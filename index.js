@@ -52,10 +52,8 @@ app.intent("userRequestsBMI", (conv) => {
         conv.ask("Please provide the measurement type in imperial or metric");
     } else if (!height) {
         conv.ask("Please provide height in inches");
-        weight = conv.parameters['weight']['amount'];
     } else if (!weight) {
         conv.ask("Please provide your weight");
-        height = conv.parameters['height']['amount'];
     } else {
         if (type == 'metric'){
             bmi = weight / (height * height);
@@ -76,10 +74,10 @@ app.intent("userRequestsBMI", (conv) => {
 });
 
 app.intent("bmi",(conv) => {
-    const weight = conv.parameters['weight']['amount'];
+    const weight = conv.parameters['weight'];
     conv.data.weight = weight;
 
-    const height = conv.parameters['height']['amount'];
+    const height = conv.parameters['height'];
     conv.data.height = height;
 
     const type = conv.parameters['type'];
@@ -98,7 +96,7 @@ app.intent("bmi",(conv) => {
 
             
         }
-    message = `Your bmi is ${bmi}. Would you like to know anything else?`;
+        message = `Your bmi is ${bmi}. Would you like to know anything else?`;
 
         conv.ask(message);    
 });
