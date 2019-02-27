@@ -117,7 +117,7 @@ function bmiClass(bmi){
     return bmiType;
 };
 
-function calcBMI(type, heigh, weight){
+function calcBMI(type, height, weight){
     let bmi;
     if (type == 'metric'){
         bmi = weight / (height * height);
