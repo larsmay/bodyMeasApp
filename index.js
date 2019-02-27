@@ -9,6 +9,7 @@ const app = dialogflow({debug:true});
 app.intent("userRequestsHeart", (conv) => {
 
     var message;
+
     let age = conv.data.age;
     let rest = conv.data.rest;
 
@@ -22,11 +23,8 @@ app.intent("userRequestsHeart", (conv) => {
         var max = 220 - age - rest;
     
         var heart1 = max * 0.6 + parseInt(rest);
-        conv.data.heart1 = heart1;
         var heart2 = max * 0.7 + parseInt(rest);
-        conv.data.heart2 = heart2;
         var heart3 = max * 0.8 + parseInt(rest);
-        conv.data.heart3 = heart3;
     
         message = `Your Zone 1 range is ${heart1} to ${heart2}. Your Zone 2 range is ${heart2} to ${heart3}. Your Zone 3 range is ${heart3} and greater. Would you like to know anything else?`;
 
@@ -48,11 +46,8 @@ app.intent("heartRate",(conv) => {
     var max = 220 - age - rest;
     
     var heart1 = max * 0.6 + parseInt(rest);
-    conv.data.heart1 = heart1;
     var heart2 = max * 0.7 + parseInt(rest);
-    conv.data.heart2 = heart2;
     var heart3 = max * 0.8 + parseInt(rest);
-    conv.data.heart3 = heart3;
     
     message = `Your Zone 1 range is ${heart1} to ${heart2}. Your Zone 2 range is ${heart2} to ${heart3}. Your Zone 3 range is ${heart3} and greater. Would you like to know anything else?`;
 
@@ -75,22 +70,12 @@ app.intent("userRequestsBMI", (conv) => {
     } else if (!weight) {
         conv.ask("Please provide your weight in pounds");
     } else {
-        if (type == 'metric'){
-            bmi = weight / (height * height);
-            conv.data.bmi = bmi;
-        }
-        else {
-            weight = weight * 0.45;
-            height = height * 0.025;
-            bmi = weight / (height * height);
-            conv.data.bmi = bmi;
-
-            
-        }
-        message = `Your bmi is ${bmi}, based on previous submitted values. Would you like to know anything else?`;
-
+        bmi = calcBMI(type, height, weight)
+        let bmiType = bmiClass(bmi);
+        message = `Your bmi is ${bmi}, based on previously submitted values. You fall in the ${bmiType} weight range. Would you like to know your target heart rate or body fat percent, you can also quit?`;
         conv.ask(message);
     }
+    
 });
 
 app.intent("bmi",(conv) => {
@@ -105,23 +90,46 @@ app.intent("bmi",(conv) => {
     conv.data.weight = weight;
     console.log();
     
-    
+    let bmi = calcBMI(type, height, weight);
+    let bmiType = bmiClass(bmi);
+    message = `Your bmi is ${bmi}. You fall in the ${bmiType} weight range. Would you like to know your target heart rate or body fat percent, you can also quit?`;
 
+    conv.ask(message);    
+});
+
+function bmiClass(bmi){
+    let bmiType;
+    if (bmi < 18){
+        bmiType = "Underweight";
+    }
+    else if (bmi < 24){
+        bmiType = "Healthy";
+    }
+    else if (bmi < 29){
+        bmiType = "Overweight";
+    }
+    else if (bmi < 39){
+        bmiType = "Obese";
+    }
+    else{
+        bmiType = "Extremely Obese";
+    }
+};
+
+function calcBMI(type, heigh, weight){
     let bmi;
     if (type == 'metric'){
-            bmi = weight / (height * height);
-            conv.data.bmi = bmi;
-        }
-        else {
-            weight = weight * 0.45;
-            height = height * 0.025;
-            bmi = weight / (height * height);
-            conv.data.bmi = bmi;
-        }
-        message = `Your bmi is ${bmi}. Would you like to know anything else?`;
-
-        conv.ask(message);    
-});
+        bmi = weight / (height * height);
+        conv.data.bmi = bmi;
+    }
+    else {
+        weight = weight * 0.45;
+        height = height * 0.025;
+        bmi = weight / (height * height);
+        conv.data.bmi = bmi;
+    }
+    return bmi;
+};
 
 app.intent("userRequestsBodyFat", (conv) => {
     var bodyPercent;
