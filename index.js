@@ -114,6 +114,7 @@ function bmiClass(bmi){
     else{
         bmiType = "Extremely Obese";
     }
+    return bmiType;
 };
 
 function calcBMI(type, heigh, weight){
@@ -142,15 +143,7 @@ app.intent("userRequestsBodyFat", (conv) => {
         conv.ask("To compute your body fat percentage I need your age and gender");
     }
     else {
-        if (gender == "male"){
-            bodyPercent = (1.20*bmi)+(0.23 * age) - 16.2;
-            conv.data.bodyPercent = bodyPercent;
-        }
-
-        else {
-            bodyPercent = (1.20*bmi)+(0.23 * age) - 5.4;
-            conv.data.bodyPercent = bodyPercent;
-        }
+        bodyPercent = calcPercent(age,gender,bmi);
         message = `Your Body Fat percentage is ${bodyPercent} percent.  Would you like to know anything else?`;
 
         conv.ask(message);
@@ -167,6 +160,13 @@ app.intent("userRequestsBodyFat", (conv) => {
         conv.data.age = age;
         var bodyPercent;
 
+        var message = `Your Body Fat percentage is ${bodyPercent} percent.  Would you like to know anything else?`;
+
+        conv.ask(message);
+    });
+
+    function calcPercent(age, gender, bmi){
+        let bodyPercent;
         if (gender == "male"){
             bodyPercent = (1.20*bmi)+(0.23 * age) - 16.2;
             conv.data.bodyPercent = bodyPercent;
@@ -176,9 +176,6 @@ app.intent("userRequestsBodyFat", (conv) => {
             bodyPercent = (1.20*bmi)+(0.23 * age) - 5.4;
             conv.data.bodyPercent = bodyPercent;
         }
-
-        var message = `Your Body Fat percentage is ${bodyPercent} percent.  Would you like to know anything else?`;
-
-        conv.ask(message);
-    });
+        return bodyPercent;
+    }
 exports.generateBodyMeas = bodyMeas.https.onRequest(app);
