@@ -158,7 +158,7 @@ app.intent("userRequestsBodyFat", (conv) => {
         conv.data.gender = gender;
         let age = conv.parameters['age']['amount'];
         conv.data.age = age;
-        var bodyPercent;
+        var bodyPercent = calcPercent(age,gender,bmi);
 
         var message = `Your Body Fat percentage is ${bodyPercent} percent.  Would you like to know anything else?`;
 
