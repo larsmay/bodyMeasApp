@@ -72,6 +72,7 @@ app.intent("userRequestsBMI", (conv) => {
     } else {
         bmi = calcBMI(type, height, weight)
         let bmiType = bmiClass(bmi);
+        conv.data.bmi = bmi;
         message = `Your bmi is ${bmi}, based on previously submitted values. You fall in the ${bmiType} weight range. Would you like to know your target heart rate or body fat percent, you can also quit?`;
         conv.ask(message);
     }
@@ -92,6 +93,7 @@ app.intent("bmi",(conv) => {
     
     let bmi = calcBMI(type, height, weight);
     let bmiType = bmiClass(bmi);
+    conv.data.bmi = bmi;
     message = `Your bmi is ${bmi}. You fall in the ${bmiType} weight range. Would you like to know your target heart rate or body fat percent, you can also quit?`;
 
     conv.ask(message);    
@@ -121,13 +123,11 @@ function calcBMI(type, height, weight){
     let bmi;
     if (type == 'metric'){
         bmi = weight / (height * height);
-        conv.data.bmi = bmi;
     }
     else {
         weight = weight * 0.45;
         height = height * 0.025;
         bmi = weight / (height * height);
-        conv.data.bmi = bmi;
     }
     return bmi;
 };
@@ -169,12 +169,10 @@ app.intent("userRequestsBodyFat", (conv) => {
         let bodyPercent;
         if (gender == "male"){
             bodyPercent = (1.20*bmi)+(0.23 * age) - 16.2;
-            conv.data.bodyPercent = bodyPercent;
         }
 
         else {
             bodyPercent = (1.20*bmi)+(0.23 * age) - 5.4;
-            conv.data.bodyPercent = bodyPercent;
         }
         return bodyPercent;
     }
